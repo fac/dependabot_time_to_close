@@ -5,4 +5,4 @@ QUERY=$1
 echo $(
 gh pr list --repo=fac/freeagent \
   --search "$QUERY" -L 1000 \
-   --json title,createdAt,closedAt)
+   --json title,createdAt,closedAt,labels)
