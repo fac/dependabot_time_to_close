@@ -1,6 +1,9 @@
 name: Monthly Dependabot Report
 
-on: push
+on:
+  push:
+  schedule:
+    - cron: "0 0 1 * *"
 
 env:
   SLACK_CHANNEL: C03HM8HK0JJ # front-end-arch-chat
@@ -16,7 +19,7 @@ jobs:
       - run: |
           gem install bundler
           bundle install
-          OUTPUT=$(bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01)
+          OUTPUT=$(bundle exec ruby dependabot_report.rb)
           echo 'REPORT_OUTPUT<<EOF' >> $GITHUB_ENV
           echo "$OUTPUT" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV

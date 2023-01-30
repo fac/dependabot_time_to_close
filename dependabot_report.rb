@@ -50,10 +50,10 @@ class DependabotReport
 
     total_prs = open.count + merged.count
 
-    puts "                   Total PRS: #{total_prs}"
-    puts "        Merged within 7 days: #{merged_in_time.count}"
-    puts "       Closed and not merged: #{unmerged.count}"
-    puts "                  Still Open: #{open.count}"
+    puts "Total PRS: #{total_prs}"
+    puts "Merged within 7 days: #{merged_in_time.count}"
+    puts "Closed and not merged: #{unmerged.count}"
+    puts "Still Open: #{open.count}"
     puts "\n"
     puts "Percent merged within 7 days: %#{100.0 * merged_in_time.count.to_f / total_prs}"
   end
@@ -73,12 +73,7 @@ class DependabotReport
   end
 end
 
-start_date = ARGV[0]
-end_date = ARGV[1]
-
-unless start_date && end_date
-  puts "Provide both start and end date as YYYY-MM-DD format"
-  exit
-end
+start_date = ARGV[0] || Date.today.beginning_of_month.strftime("%Y-%m-%d")
+end_date = ARGV[1] || (Date.today.end_of_month + 1.day).strftime("%Y-%m-%d")
 
 DependabotReport.new(start_date, end_date).generate_report
