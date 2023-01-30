@@ -31,7 +31,7 @@ class DependabotReport
         filter_prs_by_label(merged, label),
         filter_prs_by_label(unmerged, label),
         filter_prs_by_label(open, label),
-        )
+      )
 
       puts "\n\n"
     end
@@ -73,4 +73,12 @@ class DependabotReport
   end
 end
 
-DependabotReport.new("2023-01-01", "2023-02-01").generate_report
+start_date = ARGV[0]
+end_date = ARGV[1]
+
+unless start_date && end_date
+  puts "Provide both start and end date as YYYY-MM-DD format"
+  exit
+end
+
+DependabotReport.new(start_date, end_date).generate_report
