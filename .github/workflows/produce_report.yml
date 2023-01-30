@@ -2,6 +2,9 @@ name: Monthly Dependabot Report
 
 on: push
 
+env:
+  SLACK_CHANNEL: C03HM8HK0JJ # front-end-arch-chat
+
 jobs:
   run_report:
     runs-on: ubuntu-latest
@@ -16,3 +19,9 @@ jobs:
           bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Post to Slack
+        uses: archive/github-actions-slack@v2.6.0
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel: ${{ env.SLACK_CHANNEL }}
+          slack-text: "testing"
