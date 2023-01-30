@@ -18,7 +18,7 @@ jobs:
           bundle install
           OUTPUT=$(bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01)
           echo 'REPORT_OUTPUT<<EOF' >> $GITHUB_ENV
-          echo "report_output=$OUTPUT" >> $GITHUB_ENV
+          echo "$OUTPUT" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,4 +27,4 @@ jobs:
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
           slack-channel: ${{ env.SLACK_CHANNEL }}
-          slack-text: ${{ env.report_output }}
+          slack-text: ${{ env.REPORT_OUTPUT }}
