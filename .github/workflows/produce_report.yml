@@ -16,7 +16,10 @@ jobs:
       - run: |
           gem install bundler
           bundle install
-          echo "report_output=$(bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01)" >> $GITHUB_ENV
+          OUTPUT=$(bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01)
+          echo 'REPORT_OUTPUT<<EOF' >> $GITHUB_ENV
+          echo "report_output=$OUTPUT" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Post to Slack
