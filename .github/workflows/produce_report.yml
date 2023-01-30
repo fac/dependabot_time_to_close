@@ -16,7 +16,7 @@ jobs:
       - run: |
           gem install bundler
           bundle install
-          bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01
+          echo "report_output=$(bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01)" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Post to Slack
@@ -24,4 +24,4 @@ jobs:
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
           slack-channel: ${{ env.SLACK_CHANNEL }}
-          slack-text: "testing"
+          slack-text: ${{ env.report_output }}
