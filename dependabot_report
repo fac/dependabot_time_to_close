@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SINCE="2023-01-01"
+UNTIL="2023-02-01"
+
+OPEN=$(
+gh pr list --repo=fac/freeagent \
+  --search "is:pr is:open label:javascript created:$SINCE..$UNTIL" -L 1000 \
+   --json title --template '{{range .}}{{.title}}{{"\n"}}{{end}}' | wc -l | sed 's/^ *//')
+
+CLOSED=$(
+gh pr list --repo=fac/freeagent \
+  --search "is:pr is:closed is:unmerged label:javascript created:$SINCE..$UNTIL" -L 1000 \
+  --json title --template '{{range .}}{{.title}}{{"\n"}}{{end}}' | wc -l | sed 's/^ *//')
+
+MERGED=$(
+gh pr list --repo=fac/freeagent \
+  --search "is:pr is:merged label:javascript created:$SINCE..$UNTIL" -L 1000 \
+  --json title --template '{{range .}}{{.title}}{{"\n"}}{{end}}' | wc -l | sed 's/^ *//')
+
+
+echo "Open: $OPEN, closed: $CLOSED, merged: $MERGED"
