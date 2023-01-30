@@ -14,3 +14,5 @@ jobs:
           gem install bundler
           bundle install
           bundle exec ruby dependabot_report.rb 2023-01-01 2023-02-01
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
