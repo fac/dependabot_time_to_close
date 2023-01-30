@@ -48,11 +48,11 @@ class DependabotReport
       DateTime.parse(pr["closedAt"]) - DateTime.parse(pr["createdAt"]) <= 7.days
     end
 
-    total_prs = open.count + unmerged.count + merged.count
+    total_prs = open.count + merged.count
 
     puts "                   Total PRS: #{total_prs}"
     puts "        Merged within 7 days: #{merged_in_time.count}"
-    puts "                  Not merged: #{unmerged.count}"
+    puts "       Closed and not merged: #{unmerged.count}"
     puts "                  Still Open: #{open.count}"
     puts "\n"
     puts "Percent merged within 7 days: %#{100.0 * merged_in_time.count.to_f / total_prs}"
