@@ -19,7 +19,7 @@ jobs:
       - run: |
           gem install bundler
           bundle install
-          GITHUB_TOKEN=$(bundle exec ruby token_crafter.rb)
+          GITHUB_TOKEN=$(bundle exec ruby token_crafter.rb | tail -1)
           OUTPUT=$(bundle exec ruby dependabot_report.rb)
           echo 'REPORT_OUTPUT<<EOF' >> $GITHUB_ENV
           echo "$OUTPUT" >> $GITHUB_ENV
