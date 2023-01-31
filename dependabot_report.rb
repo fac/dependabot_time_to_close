@@ -1,6 +1,8 @@
 require 'json'
 require 'date'
+require 'active_support'
 require 'active_support/core_ext/numeric/time'
+
 
 class DependabotReport
 
@@ -73,7 +75,7 @@ class DependabotReport
   end
 end
 
-start_date = ARGV[0] || Date.today.beginning_of_month.strftime("%Y-%m-%d")
-end_date = ARGV[1] || (Date.today.end_of_month + 1.day).strftime("%Y-%m-%d")
+start_date = ARGV[0] || Date.yesterday.beginning_of_month.strftime("%Y-%m-%d")
+end_date = ARGV[1] || (Date.yesterday.end_of_month + 1.day).strftime("%Y-%m-%d")
 
 DependabotReport.new(start_date, end_date).generate_report
