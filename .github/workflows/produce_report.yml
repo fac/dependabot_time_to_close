@@ -24,7 +24,7 @@ jobs:
           echo "$OUTPUT" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_APP_TOKEN }}
       - name: Post to Slack
         uses: archive/github-actions-slack@v2.6.0
         with:
