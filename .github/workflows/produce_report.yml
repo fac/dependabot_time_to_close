@@ -6,7 +6,7 @@ on:
     - cron: "0 0 1 * *"
 
 env:
-  SLACK_CHANNEL: C03HM8HK0JJ # front-end-arch-chat
+  SLACK_CHANNEL: C0214CF01A8 # front-end-arch
 
 jobs:
   run_report:
