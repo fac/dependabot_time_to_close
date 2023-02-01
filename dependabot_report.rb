@@ -75,7 +75,7 @@ class DependabotReport
   end
 end
 
-start_date = ARGV[0] || Date.yesterday.beginning_of_month.strftime("%Y-%m-%d")
-end_date = ARGV[1] || (Date.yesterday.end_of_month + 1.day).strftime("%Y-%m-%d")
+start_date = ARGV[0] || (Date.yesterday.beginning_of_month - 7.days).strftime("%Y-%m-%d")
+end_date = ARGV[1] || (Date.yesterday.end_of_month - 8.days).strftime("%Y-%m-%d")
 
 DependabotReport.new(start_date, end_date).generate_report
