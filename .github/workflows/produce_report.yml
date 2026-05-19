@@ -18,10 +18,10 @@ jobs:
           bundler-cache: true
       - name: Generate GH Auth Token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: actions/create-github-app-token@v3
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          client-id: ${{ vars.FRONT_END_ARCH_KPI_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: "Generate the report"
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
